@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+
+    <input type="text" id="message">
+    <input type="button" value="Send" id="send" onclick="send()">
+
+
+    <!-- <script src="http://cdn.jsdelivr.net/sockjs/1.0.1/sockjs.min.js"></script> -->
+    <script src="https://secureimage.securedataimages.com/images/cams/js/sockjs/sockjs.min.js"></script>
+    <script type="text/javascript">
+    	var sock = new SockJS('http://127.0.0.1:9999/echo');
+		 sock.onopen = function() {
+		     console.log('open');
+		 };
+		 sock.onmessage = function(e) {
+		     console.log('message', e.data);
+		 };
+		 sock.onclose = function() {
+		     console.log('close');
+		 };
+
+		 
+		 //sock.close();
+
+     function send() {
+        sock.send(document.getElementById("message").value);
+     }
+
+    </script>
+
+
+
+  </body>
+</html>
